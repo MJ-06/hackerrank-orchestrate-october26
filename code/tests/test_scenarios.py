@@ -79,6 +79,23 @@ def test_c5_screenshot_only_audit_record_needs_retention(make_auditor):
     assert ops(steps) == [("VERIFY_RECORD_PRESENT", "audit_record_2", "ev_img")]
 
 
+def test_c7_screenshot_listing_a_flow_is_not_proof_it_is_disabled(make_auditor):
+    # The SQL row shows the flow disabled; a later screenshot only lists it with a
+    # "Healthy" badge (no enabled/disabled fact). The screenshot must not be cited
+    # as proof of VERIFY_DATA_FLOW_DISABLED, so the SQL evidence decides.
+    flow = ("CREATE TABLE connector_flows (resource_id TEXT, owner_email TEXT, enabled TEXT, updated_at TEXT);\n"
+            "INSERT INTO connector_flows VALUES('data_flow_7','test.person@example.com','false','2026-03-03T00:00:00Z');\n")
+    screen = {"screen": "Connectors", "records": [
+        {"system": "integration_service", "resource_id": "data_flow_7", "identifiers": ["test.person@example.com"],
+         "status": "Healthy", "fields": {"Sync mode": "Continuous sync"}}]}
+    a = make_auditor(evidence=[("ev_sql", "evidence/f.sql", "2026-03-03T00:00:00Z", flow),
+                               ("ev_img", "evidence/c.png", "2026-03-04T00:00:00Z", b"\x89PNG fake")],
+                     requests=[request()], image_results={"c.png": screen})
+    status, steps, _ = a.audit(a.requests[0])
+    assert status == "COMPLETE"
+    assert ops(steps) == [("VERIFY_DATA_FLOW_DISABLED", "data_flow_7", "ev_sql")]
+
+
 def test_c6_anonymized_orphan_is_linked_through_policy_batch(make_auditor):
     # analytics_200 carries no identifier any more; only the deletion worker's
     # batch (just before this request's COMPLETE report) ties it to the case.

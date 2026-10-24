@@ -369,6 +369,23 @@ class Auditor:
             return o["source"] != "image" or (retention_until(o) or "") >= day
 
         return keep
+
+    @staticmethod
+    def decisive_evidence(treat: str):
+        """Filter that drops screenshot observations which cannot decide this treatment.
+
+        A screen that merely lists a connector, backup or record proves it exists,
+        but not that a flow is disabled, a restore blocked, or identifiers removed.
+        Such a screenshot must not be cited as proof of compliance.
+        """
+        key = {"DISABLE": "active", "BLOCK": "active", "REDACT": "identifiable", "ANONYMIZE": "identifiable"}.get(treat)
+        if key is None:
+            return None
+
+        def keep(o):
+            return o["source"] != "image" or observe_state(o)[key] is not None
+
+        return keep
     def state_at(self, rid: str, audit_at: str, strict: bool = True, keep=None):
         """Latest determinate observation known at audit_at (worst copy wins on ties).
 
@@ -516,7 +533,7 @@ class Auditor:
         for rid in sorted(rids):
             system = system_for(rid)
             treat = self.treatment(rid)
-            keep = self.retain_evidence(audit_at) if treat == "RETAIN" else None
+            keep = self.retain_evidence(audit_at) if treat == "RETAIN" else self.decisive_evidence(treat)
             obs, st = self.state_at(rid, audit_at, keep=keep)
             if obs is None and treat == "RETAIN":
                 # A retained record seen only in a later capture still needs a
