@@ -1,8 +1,10 @@
 """Entry point: audit every request in dataset/deletion_requests.csv and write ./output.csv.
 
 Usage:
-    python3 code/main.py                       # full run -> output.csv at repo root
-    python3 code/main.py --requests sample     # run the 32 public samples -> code/evaluation/sample_predictions.csv
+    python code/main.py                        # full run -> output.csv at repo root
+    python code/main.py --requests sample      # run the 32 public samples -> code/evaluation/sample_predictions.csv
+    python code/main.py --no-llm               # never call a model API; cached screenshot results only
+    python code/main.py --list-gemini-models   # flash models available to GEMINI_API_KEY
 """
 
 from __future__ import annotations
@@ -23,6 +25,7 @@ USAGE_FILE = ROOT / "code" / "evaluation" / "usage_summary.json"
 
 
 def run(requests_file: Path, out_file: Path, trace_file: Path | None = None, use_llm: bool = True) -> list[dict]:
+    """Audit every request in requests_file and write the submission CSV to out_file."""
     load_dotenv(ROOT)
     helper = ClaudeHelper(ROOT / "code" / "cache", allow_network=use_llm)
     auditor = Auditor(ROOT / "dataset", image_extractor=helper.read_screenshot, request_files=[ROOT / "dataset" / "deletion_requests.csv", ROOT / "dataset" / "sample_deletion_requests.csv"])
@@ -52,7 +55,8 @@ def run(requests_file: Path, out_file: Path, trace_file: Path | None = None, use
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser()
+    """CLI entry point (see module docstring for usage)."""
+    ap =argparse.ArgumentParser()
     ap.add_argument("--requests", choices=["full", "sample"], default="full")
     ap.add_argument("--no-llm", action="store_true", help="never call the API; use cached vision results only")
     ap.add_argument("--list-gemini-models", action="store_true",

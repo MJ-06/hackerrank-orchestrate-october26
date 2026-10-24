@@ -61,7 +61,8 @@ TRUE = {"true", "1", "yes", "enabled", "active"}
 FALSE = {"false", "0", "no", "disabled", "stopped", "blocked"}
 
 
-def _truthy(v):
+def _truthy(v) -> bool | None:
+    """Parse booleans written as true/1/enabled/... (None when undecidable)."""
     if v is None:
         return None
     if isinstance(v, bool):
@@ -74,7 +75,8 @@ def _truthy(v):
     return None
 
 
-def _is_null(v):
+def _is_null(v) -> bool:
+    """True for empty or explicitly scrubbed values ('[REDACTED]', 'no direct identifier')."""
     return v is None or (isinstance(v, str) and v.strip().lower() in ("", "null", "none", "[redacted]", "no direct identifier"))
 
 
@@ -194,6 +196,11 @@ def observe_state(obs: dict) -> dict:
 
 
 def obs_tokens(obs: dict, phones_known: set[str]) -> set[str]:
+    """Identifier tokens found anywhere in an observation's values: e:email, u:user_id, h:hash, p:phone.
+
+    Phones are only tokenized when they belong to a known identity, since loose
+    digit runs (order numbers, ids) would otherwise create false links.
+    """
     toks = set()
     for k, v in obs["fields"].items():
         if v is None or k in ("resource_id",):
@@ -215,6 +222,8 @@ def obs_tokens(obs: dict, phones_known: set[str]) -> set[str]:
 
 
 class Auditor:
+    """Loads all evidence once, indexes it by resource and identifier, then audits requests."""
+
     def __init__(self, dataset: Path, image_extractor=None, intent_llm=None, request_files=()):
         self.dataset = dataset
         self.identity = IdentityIndex(dataset)
@@ -258,6 +267,7 @@ class Auditor:
 
     # ------------------------------------------------------------------ discovery
     def subject_tokens(self, uid: str) -> set[str]:
+        """Every current and historical identifier token of one user."""
         ident = self.identity.identifiers(uid)
         toks = {"u:" + uid}
         toks |= {"e:" + e for e in ident["emails"]}
@@ -266,6 +276,7 @@ class Auditor:
         return toks
 
     def linked_resources(self, uids) -> set[str]:
+        """Resources whose evidence or activity mentions any identifier of these users."""
         key = tuple(sorted(uids))
         if key in self._link_cache:
             return set(self._link_cache[key])
@@ -312,6 +323,12 @@ class Auditor:
 
     # ------------------------------------------------------------------ policy
     def treatment(self, rid: str) -> str:
+        """Required action from deletion_rules.csv: DELETE, REDACT, ANONYMIZE, RETAIN, DISABLE or BLOCK.
+
+        Audit records and legal holds are retained (rules 12-13); backups keep
+        the archive but block restore (rule 14); support messages with shared
+        context are redacted while subject-only attachments are deleted (5-6).
+        """
         if rid.startswith("audit_record_") or rid.startswith("legal_hold_"):
             return "RETAIN"
         if rid.startswith("data_flow_"):
@@ -471,6 +488,7 @@ class Auditor:
 
     # ------------------------------------------------------------------ audit
     def audit(self, case: dict) -> tuple[str, list[dict], dict]:
+        """Decide one request: (deletion_status, ordered steps, trace for debugging)."""
         trace = {"case_id": case["case_id"]}
         authorized, why = intent_mod.classify(case["request_text"], self.intent_llm)
         trace["intent"] = why
@@ -489,7 +507,8 @@ class Auditor:
         status, steps, _ = self._evaluate(case, rids, account)
         return status, steps, trace
 
-    def _evaluate(self, case, rids, account):
+    def _evaluate(self, case: dict, rids: set[str], account: str | None):
+        """Compare each linked resource's state at audit_at with its required treatment."""
         audit_at = case["audit_at"]
 
         findings, remediation, verification = [], [], []
@@ -548,7 +567,12 @@ class Auditor:
         return status, steps, None
 
 
-def order_steps(items):
+def order_steps(items) -> list[dict]:
+    """(system, resource, operation, evidence) tuples -> numbered steps in canonical order.
+
+    Phase first (FINDING, REMEDIATION, VERIFICATION), then operation order, which
+    puts DISABLE/BLOCK before record changes, then system_id and resource_id.
+    """
     rows = []
     for system, rid, op, ev in items:
         rows.append({

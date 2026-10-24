@@ -77,10 +77,12 @@ def load_dotenv(root: Path) -> None:
 
 
 class UsageMeter:
+    """Records every model call (or cache hit) for the usage report."""
+
     def __init__(self):
         self.calls = []
 
-    def add(self, model, purpose, usage, cached=False):
+    def add(self, model: str, purpose: str, usage, cached: bool = False) -> None:
         self.calls.append({
             "model": model,
             "purpose": purpose,
@@ -89,7 +91,8 @@ class UsageMeter:
             "output_tokens": getattr(usage, "output_tokens", 0) if not isinstance(usage, dict) else usage.get("output_tokens", 0),
         })
 
-    def summary(self):
+    def summary(self) -> dict:
+        """Per-model call counts, cache hits, tokens and estimated cost."""
         per_model = {}
         for c in self.calls:
             m = per_model.setdefault(c["model"], {"calls": 0, "cache_hits": 0, "input_tokens": 0, "output_tokens": 0})
@@ -222,7 +225,8 @@ class ClaudeHelper:
         resp = gemini_request(f"models/{self.model}:generateContent", body)
         return parse_gemini_response(resp) if resp is not None else None
 
-    def _call(self, content, max_tokens):
+    def _call(self, content: list, max_tokens: int):
+        """Anthropic Messages call with up to 3 tries on rate limits and transient errors."""
         import anthropic  # type: ignore
 
         for attempt in range(3):
@@ -294,6 +298,7 @@ def list_gemini_models() -> list[str] | None:
 
 
 def parse_json_object(text: str) -> dict:
+    """First {...} block in a model reply; unparseable text is kept as captured_text."""
     m = re.search(r"\{.*\}", text, re.S)
     if not m:
         return {"records": [], "captured_text": text}
@@ -326,7 +331,8 @@ def screenshot_to_text(result: dict) -> str:
 
 
 def normalize_status(status: str) -> str | None:
-    s = (status or "").strip().lower()
+    """Map an on-screen status label to an engine result (longest matching phrase wins)."""
+    s =(status or "").strip().lower()
     for key in sorted(STATUS_MAP, key=len, reverse=True):
         if key in s:
             return STATUS_MAP[key]

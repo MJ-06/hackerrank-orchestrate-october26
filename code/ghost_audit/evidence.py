@@ -52,13 +52,16 @@ PREFIX_SYSTEM = [
 
 
 def system_for(resource_id: str) -> str:
+    """Owning system implied by a resource id prefix (e.g. search_12 -> search_service)."""
     for prefix, system in PREFIX_SYSTEM:
         if resource_id.startswith(prefix):
             return system
     return "unknown"
 
 
-def _obs(file_id, captured_at, ts, resource_id, fields, source, system=None):
+def _obs(file_id: str, captured_at: str, ts: str | None, resource_id: str, fields: dict, source: str,
+         system: str | None = None) -> dict:
+    """Build one observation; ts falls back to the file's capture time."""
     return {
         "file_id": file_id,
         "captured_at": captured_at,
@@ -87,7 +90,12 @@ TABLE_SYSTEMS = [
 ]
 
 
-def parse_sql(path: Path, file_id: str, captured_at: str):
+def parse_sql(path: Path, file_id: str, captured_at: str) -> list[dict]:
+    """Load a SQLite-compatible dump in memory; one observation per row with a resource_id.
+
+    Also emits a coverage marker listing the systems the snapshot covers, so a
+    resource missing from it can later be proven absent.
+    """
     con = sqlite3.connect(":memory:")
     text = path.read_text(encoding="utf-8")
     try:
@@ -139,7 +147,8 @@ def parse_sql(path: Path, file_id: str, captured_at: str):
     return out
 
 
-def _flatten(d, prefix=""):
+def _flatten(d: dict, prefix: str = "") -> dict:
+    """Merge nested dicts into one flat dict (inner keys win; lists are kept as values)."""
     flat = {}
     for k, v in d.items():
         if isinstance(v, dict):
@@ -152,7 +161,12 @@ def _flatten(d, prefix=""):
 # --------------------------------------------------------------------------- JSON
 
 
-def parse_json(path: Path, file_id: str, captured_at: str):
+def parse_json(path: Path, file_id: str, captured_at: str) -> list[dict]:
+    """Walk any JSON tree; every dict with a resource_id becomes an observation.
+
+    Timestamps and system names are inherited from enclosing objects, so the
+    same parser handles API responses, snapshot bundles and exports.
+    """
     data = json.loads(path.read_text(encoding="utf-8"))
     out = []
 
@@ -198,7 +212,8 @@ def parse_json(path: Path, file_id: str, captured_at: str):
 KNOWN_SYSTEMS = {s for _, s in PREFIX_SYSTEM}
 
 
-def trail_system(trail):
+def trail_system(trail: list[str]) -> str | None:
+    """Nearest enclosing JSON key that names a known system."""
     for t in reversed(trail):
         if t in KNOWN_SYSTEMS:
             return t
@@ -209,6 +224,7 @@ def trail_system(trail):
 
 
 def _line_service(line: str) -> str | None:
+    """A system name mentioned as a whole word in a log line."""
     for system in KNOWN_SYSTEMS | {"profile_service", "support_replica"}:
         if re.search(rf"(?<![A-Za-z_]){system}(?![A-Za-z_])", line):
             return system
@@ -216,6 +232,7 @@ def _line_service(line: str) -> str | None:
 
 
 def _line_trace(line: str, kv: dict) -> str | None:
+    """Trace/request id that groups related log lines (k=v field or bracketed tr-/rb- id)."""
     for key in ("trace_id", "requestId"):
         if key in kv:
             return kv[key]
@@ -223,10 +240,11 @@ def _line_trace(line: str, kv: dict) -> str | None:
     return m.group(1) if m else None
 
 
+# Infrastructure chatter that says nothing about a record's state.
 NOISE_EVENTS = {"cache_lookup", "connection_acquired", "dependency_retry", "dependency_recovered", "cache_refresh", "consumer_lag"}
 
 
-def parse_log(path: Path, file_id: str, captured_at: str):
+def parse_log(path: Path, file_id: str, captured_at: str) -> list[dict]:
     """Group log lines by trace id and fold every key=value into the trace's resource."""
     traces: dict[str, dict] = {}
     order = []
@@ -295,7 +313,8 @@ def parse_log(path: Path, file_id: str, captured_at: str):
 # --------------------------------------------------------------------------- text / pdf
 
 
-def parse_pipe_text(path: Path, file_id: str, captured_at: str):
+def parse_pipe_text(path: Path, file_id: str, captured_at: str) -> list[dict]:
+    """Handover notes: 'ts | system | resource_id | record_type | result | subject' lines."""
     out = []
     for line in path.read_text(encoding="utf-8").splitlines():
         parts = [p.strip() for p in line.lstrip("- ").split("|")]
@@ -307,6 +326,7 @@ def parse_pipe_text(path: Path, file_id: str, captured_at: str):
 
 
 def pdf_text(path: Path) -> str:
+    """PDF text via poppler's pdftotext (layout kept), else pypdf, else empty."""
     if shutil.which("pdftotext"):
         try:
             return subprocess.run(
@@ -322,7 +342,7 @@ def pdf_text(path: Path) -> str:
         return ""
 
 
-def parse_document_text(text: str, file_id: str, captured_at: str, source: str):
+def parse_document_text(text: str, file_id: str, captured_at: str, source: str) -> list[dict]:
     """Business documents: every resource id mentioned is tied to the identifiers in the same document."""
     out = []
     rids = sorted(set(m.group(0) for m in RESOURCE_RE.finditer(text)))
@@ -331,7 +351,7 @@ def parse_document_text(text: str, file_id: str, captured_at: str, source: str):
     return out
 
 
-def parse_screenshot(result: dict, file_id: str, captured_at: str):
+def parse_screenshot(result: dict, file_id: str, captured_at: str) -> list[dict]:
     """Vision transcription -> one observation per record shown on screen."""
     from .llm import normalize_status, screenshot_to_text
 
@@ -362,12 +382,13 @@ def parse_screenshot(result: dict, file_id: str, captured_at: str):
 # --------------------------------------------------------------------------- loader
 
 
-def load_manifest(dataset: Path):
+def load_manifest(dataset: Path) -> list[dict]:
+    """Rows of evidence_files.csv (file_id, file_path, origin, captured_at)."""
     with open(dataset / "evidence_files.csv", newline="", encoding="utf-8") as fh:
         return list(csv.DictReader(fh))
 
 
-def load_all(dataset: Path, image_extractor=None):
+def load_all(dataset: Path, image_extractor=None) -> tuple[list[dict], dict, list[tuple[str, str]]]:
     """Return (observations, documents, skipped) for every manifest entry."""
     observations, documents, skipped = [], {}, []
     for row in load_manifest(dataset):

@@ -1,4 +1,9 @@
-"""Current + historical identity resolution."""
+"""Current + historical identity resolution.
+
+A request email may be a current or a past address, and old systems may still
+hold past names, phones or email hashes. The index merges the identity snapshot
+with every old/new value in the audit log so all of them resolve to one user_id.
+"""
 
 from __future__ import annotations
 
@@ -9,14 +14,18 @@ from pathlib import Path
 
 
 def norm_email(v: str) -> str:
+    """Case- and whitespace-insensitive email key."""
     return v.strip().lower()
 
 
 def norm_phone(v: str) -> str:
+    """Digits only, so '+34 612 847 593' and '+34612847593' match."""
     return re.sub(r"\D", "", v)
 
 
 class IdentityIndex:
+    """user_id -> every known name/email/phone/hash, plus email -> user_ids."""
+
     def __init__(self, dataset: Path):
         self.users: dict[str, dict] = {}
         self.by_email: dict[str, set[str]] = defaultdict(set)
@@ -56,10 +65,9 @@ class IdentityIndex:
                             user["names"].add(value)
 
     def resolve(self, email: str) -> list[str]:
+        """User ids that ever held this email (current or historical), sorted."""
         return sorted(self.by_email.get(norm_email(email), set()))
 
     def identifiers(self, uid: str) -> dict:
+        """All known identifier sets for uid (empty sets for an unknown user)."""
         return self.users.get(uid, {"user_id": uid, "names": set(), "emails": set(), "phones": set(), "hashes": set()})
-
-    def audit_ids(self, uid: str) -> list[str]:
-        return [r["audit_id"] for r in self.history.get(uid, [])]
