@@ -1,0 +1,400 @@
+[
+ {
+  "case_id": "case_01",
+  "intent": "deletion cue: \\bremove",
+  "user_ids": [
+   "user_01"
+  ],
+  "linked": [
+   "account_001"
+  ]
+ },
+ {
+  "case_id": "case_02",
+  "intent": "deletion cue: eliminaci[o\u00f3]n",
+  "user_ids": [
+   "user_02"
+  ],
+  "linked": [
+   "account_002"
+  ]
+ },
+ {
+  "case_id": "case_03",
+  "intent": "deletion cue: suppression",
+  "user_ids": [
+   "user_43"
+  ],
+  "linked": [
+   "account_7566",
+   "analytics_9406",
+   "audit_record_2016"
+  ]
+ },
+ {
+  "case_id": "case_04",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_04"
+  ],
+  "linked": [
+   "analytics_901"
+  ]
+ },
+ {
+  "case_id": "case_05",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_05"
+  ],
+  "linked": [
+   "account_005"
+  ]
+ },
+ {
+  "case_id": "case_06",
+  "intent": "deletion cue: \\bremove",
+  "user_ids": [
+   "user_06"
+  ],
+  "linked": [
+   "account_006",
+   "search_001"
+  ]
+ },
+ {
+  "case_id": "case_07",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_07"
+  ],
+  "linked": [
+   "account_007",
+   "object_19",
+   "support_001"
+  ]
+ },
+ {
+  "case_id": "case_08",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_08"
+  ],
+  "linked": [
+   "account_008",
+   "export_001"
+  ]
+ },
+ {
+  "case_id": "case_09",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_61"
+  ],
+  "linked": [
+   "account_3960",
+   "audit_record_4902",
+   "backup_4978"
+  ]
+ },
+ {
+  "case_id": "case_10",
+  "intent": "deletion cue: \\bremove",
+  "user_ids": [
+   "user_10"
+  ],
+  "linked": [
+   "account_010",
+   "support_002"
+  ]
+ },
+ {
+  "case_id": "case_11",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_32"
+  ],
+  "linked": [
+   "account_4248",
+   "analytics_2034",
+   "audit_record_9394",
+   "data_flow_9522",
+   "search_052",
+   "support_864"
+  ]
+ },
+ {
+  "case_id": "case_12",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_12"
+  ],
+  "linked": [
+   "account_9797",
+   "analytics_9914",
+   "audit_record_2945"
+  ]
+ },
+ {
+  "case_id": "case_13",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_33"
+  ],
+  "linked": [
+   "account_9335",
+   "audit_record_4816",
+   "search_1308",
+   "support_4218"
+  ]
+ },
+ {
+  "case_id": "case_14",
+  "intent": "deletion cue: \u524a\u9664",
+  "user_ids": [
+   "user_37"
+  ],
+  "linked": [
+   "account_3677",
+   "audit_record_987",
+   "backup_3870"
+  ]
+ },
+ {
+  "case_id": "case_15",
+  "intent": "deletion cue: \\bclose (my|this|the) account",
+  "user_ids": [
+   "user_15"
+  ],
+  "linked": [
+   "account_4745",
+   "audit_record_1596",
+   "data_flow_9846"
+  ]
+ },
+ {
+  "case_id": "case_16",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_53"
+  ],
+  "linked": [
+   "account_994",
+   "audit_record_9528",
+   "search_1007"
+  ]
+ },
+ {
+  "case_id": "case_17",
+  "intent": "deletion cue: \\bclose (my|this|the) account",
+  "user_ids": [
+   "user_17"
+  ],
+  "linked": [
+   "account_4092",
+   "audit_record_1797",
+   "backup_3245",
+   "tombstone_17"
+  ]
+ },
+ {
+  "case_id": "case_18",
+  "intent": "deletion cue: \\bremove",
+  "user_ids": [
+   "user_50"
+  ],
+  "linked": [
+   "account_5521",
+   "analytics_037",
+   "data_flow_4890",
+   "search_4013",
+   "support_5569"
+  ]
+ },
+ {
+  "case_id": "case_19",
+  "intent": "deletion cue: \\bremove",
+  "user_ids": [
+   "user_19"
+  ],
+  "linked": [
+   "account_9102",
+   "audit_record_6793",
+   "search_6083",
+   "support_9553"
+  ]
+ },
+ {
+  "case_id": "case_20",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_48"
+  ],
+  "linked": [
+   "account_5037",
+   "data_flow_1770",
+   "search_4262"
+  ]
+ },
+ {
+  "case_id": "case_21",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_21"
+  ],
+  "linked": [
+   "account_6440",
+   "analytics_5335",
+   "audit_record_3737"
+  ]
+ },
+ {
+  "case_id": "case_22",
+  "intent": "deletion cue: \\berase",
+  "user_ids": [
+   "user_51"
+  ],
+  "linked": [
+   "account_4990",
+   "analytics_4440",
+   "audit_record_3482",
+   "search_8911"
+  ]
+ },
+ {
+  "case_id": "case_23",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_23"
+  ],
+  "linked": [
+   "account_410",
+   "audit_record_4128",
+   "export_7364",
+   "search_898"
+  ]
+ },
+ {
+  "case_id": "case_24",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_24"
+  ],
+  "linked": [
+   "account_5334",
+   "audit_record_7095",
+   "search_5577"
+  ]
+ },
+ {
+  "case_id": "case_25",
+  "intent": "deletion cue: \\bremove",
+  "user_ids": [
+   "user_25"
+  ],
+  "linked": [
+   "account_3136",
+   "analytics_1895",
+   "audit_record_451"
+  ]
+ },
+ {
+  "case_id": "case_26",
+  "intent": "default: deletion follow-up",
+  "user_ids": [
+   "user_26"
+  ],
+  "linked": [
+   "account_5684",
+   "analytics_4566",
+   "audit_record_5416",
+   "backup_3120",
+   "data_flow_6244",
+   "support_4715"
+  ]
+ },
+ {
+  "case_id": "case_27",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_27"
+  ],
+  "linked": [
+   "account_3866",
+   "analytics_4574",
+   "audit_record_3830",
+   "backup_5970",
+   "data_flow_2295",
+   "support_4707"
+  ]
+ },
+ {
+  "case_id": "case_28",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_28"
+  ],
+  "linked": [
+   "account_5482",
+   "analytics_6077",
+   "audit_record_9265",
+   "backup_838",
+   "data_flow_2337",
+   "support_2351"
+  ]
+ },
+ {
+  "case_id": "case_29",
+  "intent": "deletion cue: \\bremove",
+  "user_ids": [
+   "user_29"
+  ],
+  "linked": [
+   "account_7012",
+   "analytics_5208",
+   "audit_record_3954",
+   "data_flow_3827",
+   "search_1993",
+   "support_5281"
+  ]
+ },
+ {
+  "case_id": "case_30",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_30"
+  ],
+  "linked": [
+   "account_4163",
+   "analytics_3697",
+   "audit_record_1707",
+   "data_flow_8524",
+   "search_9359",
+   "support_6477"
+  ]
+ },
+ {
+  "case_id": "case_31",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_541"
+  ],
+  "linked": [
+   "account_4857",
+   "audit_record_6909",
+   "tombstone_440"
+  ]
+ },
+ {
+  "case_id": "case_32",
+  "intent": "deletion cue: \\bdelet",
+  "user_ids": [
+   "user_542"
+  ],
+  "linked": [
+   "account_8858",
+   "audit_record_7068",
+   "tombstone_9178"
+  ]
+ }
+]
