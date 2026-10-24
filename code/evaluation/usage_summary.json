@@ -1,0 +1,93 @@
+{
+ "requests": 518,
+ "per_model": {
+  "gemini-3.8-flash": {
+   "calls": 11,
+   "cache_hits": 11,
+   "input_tokens": 15261,
+   "output_tokens": 9892,
+   "provider": "gemini",
+   "pricing": "free tier",
+   "cost_usd": 0.0
+  }
+ },
+ "calls": [
+  {
+   "model": "gemini-3.8-flash",
+   "purpose": "vision",
+   "cached": true,
+   "input_tokens": 1387,
+   "output_tokens": 1123
+  },
+  {
+   "model": "gemini-3.8-flash",
+   "purpose": "vision",
+   "cached": true,
+   "input_tokens": 1399,
+   "output_tokens": 765
+  },
+  {
+   "model": "gemini-3.8-flash",
+   "purpose": "vision",
+   "cached": true,
+   "input_tokens": 1373,
+   "output_tokens": 655
+  },
+  {
+   "model": "gemini-3.8-flash",
+   "purpose": "vision",
+   "cached": true,
+   "input_tokens": 1373,
+   "output_tokens": 648
+  },
+  {
+   "model": "gemini-3.8-flash",
+   "purpose": "vision",
+   "cached": true,
+   "input_tokens": 1399,
+   "output_tokens": 893
+  },
+  {
+   "model": "gemini-3.8-flash",
+   "purpose": "vision",
+   "cached": true,
+   "input_tokens": 1387,
+   "output_tokens": 778
+  },
+  {
+   "model": "gemini-3.8-flash",
+   "purpose": "vision",
+   "cached": true,
+   "input_tokens": 1373,
+   "output_tokens": 891
+  },
+  {
+   "model": "gemini-3.8-flash",
+   "purpose": "vision",
+   "cached": true,
+   "input_tokens": 1399,
+   "output_tokens": 1238
+  },
+  {
+   "model": "gemini-3.8-flash",
+   "purpose": "vision",
+   "cached": true,
+   "input_tokens": 1399,
+   "output_tokens": 909
+  },
+  {
+   "model": "gemini-3.8-flash",
+   "purpose": "vision",
+   "cached": true,
+   "input_tokens": 1373,
+   "output_tokens": 1526
+  },
+  {
+   "model": "gemini-3.8-flash",
+   "purpose": "vision",
+   "cached": true,
+   "input_tokens": 1399,
+   "output_tokens": 466
+  }
+ ]
+}
