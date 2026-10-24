@@ -315,10 +315,12 @@ STATUS_MAP = {
 
 def screenshot_to_text(result: dict) -> str:
     """Flatten a vision result into text the document parser can link on."""
-    parts = [result.get("screen", ""), result.get("captured_text", "")]
-    for rec in result.get("records", []):
-        parts.append(" | ".join([rec.get("system", ""), rec.get("resource_id", ""), rec.get("status", "")]
-                                + [str(i) for i in rec.get("identifiers", [])]
+    # Models may return JSON null for fields they cannot see, so coerce with `or`.
+    parts = [result.get("screen") or "", result.get("captured_text") or ""]
+    for rec in result.get("records") or []:
+        parts.append(" | ".join([str(rec.get("system") or ""), str(rec.get("resource_id") or ""),
+                                 str(rec.get("status") or "")]
+                                + [str(i) for i in rec.get("identifiers") or []]
                                 + [f"{k}={v}" for k, v in (rec.get("fields") or {}).items()]))
     return "\n".join(p for p in parts if p)
 

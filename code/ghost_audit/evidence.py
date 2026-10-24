@@ -338,12 +338,12 @@ def parse_screenshot(result: dict, file_id: str, captured_at: str):
     out = []
     full_text = screenshot_to_text(result)
     seen = set()
-    for rec in result.get("records", []):
-        rid = str(rec.get("resource_id", "")).strip()
+    for rec in result.get("records") or []:
+        rid = str(rec.get("resource_id") or "").strip()
         if not RESOURCE_RE.fullmatch(rid):
             continue
         seen.add(rid)
-        fields = {"identifiers": [str(i) for i in rec.get("identifiers", [])], "screen_status": rec.get("status")}
+        fields = {"identifiers": [str(i) for i in rec.get("identifiers") or []], "screen_status": rec.get("status")}
         status = normalize_status(rec.get("status", ""))
         if status:
             fields["result"] = status

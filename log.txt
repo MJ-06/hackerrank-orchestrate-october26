@@ -101,3 +101,24 @@ branch=solution/baseline
 repo_root=D:\Projects\hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## [2026-10-24T20:19:09Z] Gemini key added: vision runs and push attempt
+
+User Prompt (verbatim, secrets redacted):
+Key added and push
+
+Agent Response Summary:
+The git push failed (GitHub rejected the stored credentials). The key had been saved as .env.txt, which the loader ignores and .gitignore does not cover, so I renamed it to .env (contents untouched, never printed). I listed the models and chose gemini-3.8-flash (newest stable flash, not preview), then read all 11 screenshots. Gemini returns JSON null for unseen fields, which crashed screenshot_to_text on 2 files, so I made the code null-safe. Sample scores are unchanged (status 1.0, step_f1 0.992). The full run wrote 518 rows, with 10 rows different from the committed output.csv; output.csv is not committed pending review.
+
+Actions:
+* git push (failed: authentication); renamed .env.txt to .env
+* python code/main.py --list-gemini-models; sample and full runs with GEMINI_MODEL=gemini-3.8-flash; evaluator
+* Edited code/ghost_audit/llm.py (screenshot_to_text) and code/ghost_audit/evidence.py (parse_screenshot) for null fields
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5[1m]
+branch=solution/baseline
+repo_root=D:\Projects\hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
