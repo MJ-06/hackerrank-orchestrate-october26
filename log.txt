@@ -143,3 +143,24 @@ branch=solution/baseline
 repo_root=D:\Projects\hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## [2026-10-24T20:39:47Z] Strengthen code.zip: tests, reports, README, build script
+
+User Prompt (verbatim, secrets redacted):
+(coordinator brief relayed from the project, summarized; not a direct user message) Make the code.zip deliverable as strong as possible: README with architecture and setup; evaluation_report.md and usage_report.md from real runs; pytest suite with fixture-based custom cases and an offline sample regression; a no-behaviour-change quality pass; code/build_zip.py with a secret scan; check log.txt against the AGENTS.md format. Do not push.
+
+Agent Response Summary:
+Added code/tests (29 passing tests plus 1 strict xfail documenting an intent-classifier limitation), docstrings and type hints (output.csv byte-identical, pyflakes clean), README.md, code/evaluation/evaluation_report.md and usage_report.md, and code/build_zip.py (31 files, no key patterns, no .env, no dataset/). While checking the report, I found that four COMPLETE rows (case_39, 50, 53, 55) cited screenshots that only list a record as proof of disabled/blocked/redacted/anonymized. I fixed this generically for image evidence only; sample scores are unchanged (status 1.0, step_f1 0.992). The cloud session's turns behind commits 391937c and 33d0d51 have no log entries, and their verbatim prompts are not known on this machine, so they were not reconstructed.
+
+Actions:
+* Created code/tests/{conftest,test_units,test_scenarios}.py, code/build_zip.py, code/evaluation/{evaluation_report,usage_report}.md; rewrote README.md and code/requirements.txt
+* Edited code/ghost_audit/*.py and code/main.py (docstrings and type hints; Auditor.decisive_evidence)
+* python -m pytest code/tests; python code/main.py --requests sample --no-llm; python code/evaluation/main.py; python code/main.py; python code/build_zip.py
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5[1m]
+branch=solution/baseline
+repo_root=D:\Projects\hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
