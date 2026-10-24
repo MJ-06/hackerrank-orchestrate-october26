@@ -164,3 +164,87 @@ branch=solution/baseline
 repo_root=D:\Projects\hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## [2026-10-24T19:29:56Z] Branch push, optional Claude vision layer, LLM and key setup
+
+User Prompt (verbatim, secrets redacted):
+gh repo clone MJ-06/hackerrank-orchestrate-october26 Cloned the repo
+
+I currently have claude which we are using and no other LLM, but what is the appropriate setup for this ? and i think haiku 5.5 will work wonders with a proper prompt and low cost, what are the suggested LLM and how to use them ? and we should not put LLM key on the github.
+What other things are required, can we use a hugging face vision model ?
+
+Agent Response Summary:
+(Entry appended later from the cloud session's transcript; the turn itself ran in the cloud session.) Attached the fork MJ-06/hackerrank-orchestrate-october26 and pushed branch solution/baseline with the existing baseline commits (a6754e2, 8986066). Added code/ghost_audit/llm.py, an optional Claude vision layer (default claude-haiku-5-5) that turns screenshots into JSON records, caches results on disk keyed by file hash plus prompt version, and tracks tokens and cost with a UsageMeter. Added a minimal .env loader, .gitignore (.env, venv, __pycache__, code.zip), .env.example and code/requirements.txt, and stopped tracking __pycache__. Recommended Haiku 5.5 for vision and rules for everything else; a Hugging Face vision model is possible but weaker on dense admin screens.
+
+Actions:
+* git push -u origin solution/baseline
+* Created code/ghost_audit/llm.py, .env.example, .gitignore, code/requirements.txt; commit 391937c
+* git rm -r --cached __pycache__; commit 33d0d51
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5[1m]
+branch=solution/baseline
+repo_root=/home/claude/interviewstreet/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+
+## [2026-10-24T19:38:16Z] Run the baseline locally
+
+User Prompt (verbatim, secrets redacted):
+yes run them
+
+Agent Response Summary:
+(Entry appended later; the run is also summarized in the 19:43:10Z entry above.) Ran the 32-sample baseline offline, the evaluator and the full run on the laptop with Python 3.10.5. Results: status_accuracy 1.0, step_f1 0.992, sequence_accuracy 0.906, and "wrote 518 rows". 11 screenshot evidence files were reported as image-not-extracted.
+
+Actions:
+* python code/main.py --requests sample --no-llm
+* python code/evaluation/main.py
+* python code/main.py --no-llm
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5[1m]
+branch=solution/baseline
+repo_root=D:\Projects\hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+
+## [2026-10-24T19:39:06Z] Free Gemini key and Gemini vision provider
+
+User Prompt (verbatim, secrets redacted):
+How will you get a free google gemini Key ? if you can then use it and appropraite gemini model ?
+
+Agent Response Summary:
+(Entry appended later. This is the prompt behind the 19:43:10Z "Add Gemini free-tier vision provider" entry, whose prompt field quoted "yes run them" by mistake; earlier entries are not edited because the log is append-only.) Explained that the key must be created by the user in Google AI Studio and stored in a git-ignored .env. Added the Gemini provider (stdlib urllib, x-goog-api-key header, retries, provider- and model-keyed cache), GHOST_LLM_PROVIDER auto|gemini|anthropic, and --list-gemini-models. Offline scores were unchanged. Commit 2f68755.
+
+Actions:
+* Edited code/ghost_audit/llm.py, code/main.py, .env.example
+* Parser unit check; python code/main.py --requests sample --no-llm; python code/evaluation/main.py
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5[1m]
+branch=solution/baseline
+repo_root=D:\Projects\hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
+
+## [2026-10-24T20:23:02Z] What is needed to reach the top of the leaderboard
+
+User Prompt (verbatim, secrets redacted):
+This is the top dashboard, what do we need to come at the top of this ?
+
+Agent Response Summary:
+(Entry appended later. The work for this turn is detailed in the "Strengthen code.zip" entry above.) Concentrated on the deliverables with the most points still available, code.zip (30) and log.txt (10). Added the pytest suite with fixture-based custom cases, the solution README, the evaluation and usage reports, code/build_zip.py with a secret scan, and a fix so screenshots are no longer cited as proof of compliance they do not show. Sample scores are status 1.0 and step_f1 0.992.
+
+Actions:
+* See the "Strengthen code.zip: tests, reports, README, build script" entry (commits fbb51d6 to 0860a4f)
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5[1m]
+branch=solution/baseline
+repo_root=D:\Projects\hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
