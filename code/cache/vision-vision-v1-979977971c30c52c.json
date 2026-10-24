@@ -1,0 +1,54 @@
+{
+ "provider": "gemini",
+ "model": "gemini-3.8-flash",
+ "file": "search_index_inspector_20260901.png",
+ "sha256": "75afdb0ae53a4510c83399a70d88073cb4fb2747454095756e4ddad1a8c70605",
+ "usage": {
+  "input_tokens": 1399,
+  "output_tokens": 765
+ },
+ "result": {
+  "screen": "Search Console - Customer Search",
+  "captured_text": "Search Console\nemail:g.silva76@gmail.com\nNorthstar Shop / Search Console / Customer Search\nCustomer Search 2 hits\ncustomer_directory_v3 / prod-eu\nExecuted 01 Sep 2026 06:00:14 UTC\nLatency 184 ms\nIndex customer_directory_v3\nEnvironment prod-eu\nShard total 184 ms\nResults (2)\n_id Display name Email Customer reference Score Last indexed\nsearch_428 Gabriel Silva g.silva76@gmail.com user_13 9.84 05:58:21 UTC\nsearch_1874 — g.silva76.jr@gmail.com — 4.12 05:55:03 UTC\nRaw document · search_428\n_index customer_directory_v3\n_id search_428\ndisplay_name Gabriel Silva\nemail g.silva76@gmail.com\ncustomer_reference user_13\nindexed_at 2026-09-01T05:58:21Z\nActivity\n06:00:14 email:g.silva76@gmail.com · 2 hits\n05:42:03 customer_reference:user_9842 · 1 hit\n05:31:18 display_name:\"Aditi Jain\" · 1 hit",
+  "records": [
+   {
+    "system": "search_service",
+    "resource_id": "search_428",
+    "identifiers": [
+     "search_428",
+     "Gabriel Silva",
+     "g.silva76@gmail.com",
+     "user_13"
+    ],
+    "status": null,
+    "fields": {
+     "_index": "customer_directory_v3",
+     "_id": "search_428",
+     "display_name": "Gabriel Silva",
+     "email": "g.silva76@gmail.com",
+     "customer_reference": "user_13",
+     "score": "9.84",
+     "last_indexed": "05:58:21 UTC",
+     "indexed_at": "2026-09-01T05:58:21Z"
+    }
+   },
+   {
+    "system": "search_service",
+    "resource_id": "search_1874",
+    "identifiers": [
+     "search_1874",
+     "g.silva76.jr@gmail.com"
+    ],
+    "status": null,
+    "fields": {
+     "_id": "search_1874",
+     "display_name": "—",
+     "email": "g.silva76.jr@gmail.com",
+     "customer_reference": "—",
+     "score": "4.12",
+     "last_indexed": "05:55:03 UTC"
+    }
+   }
+  ]
+ }
+}

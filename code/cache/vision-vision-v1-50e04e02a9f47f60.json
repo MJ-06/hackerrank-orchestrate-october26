@@ -1,0 +1,88 @@
+{
+ "provider": "gemini",
+ "model": "gemini-3.8-flash",
+ "file": "account_admin_console_20260926.png",
+ "sha256": "d5c32ca5b6e1a2b4bbe9f5d41835ef1fd5d4f7061dab9067a4f9f88cea3c1861",
+ "usage": {
+  "input_tokens": 1387,
+  "output_tokens": 1123
+ },
+ "result": {
+  "screen": "Northstar Shop - Customer Operations - Customers",
+  "captured_text": "Northstar Shop / Customer Operations / Customers\nHaruka Sato Silver\nuser_11 · account_5762\nEmail: haruka.s1838@zoho.com\nPhone: +81 90 7610 2507\nSignup channel: mobile_app\nMarket: JP\nPreferred language: Japanese\nLast contact: 24 Sep 2026 09:14 JST\nOverview Updated moments ago · 2 records\nORD-20265762 12 Sep 2026 Ceramic coffee set 1 JPY 8,900 Delivered · 18 Sep\nORD-20265518 28 Aug 2026 Travel backpack 1 JPY 12,400 Returned · 03 Sep\nCustomer details\nDefault address: 2-18-4 Kichijoji, Musashino, Tokyo 180-0004\nLoyalty tier: Silver\nSupport: CS-8538 · support_9538\nMember since: 12 Jan 2024\nActivity\n24 Sep Customer replied to CS-8538\n22 Sep Support agent responded\n18 Sep Order ORD-20265762 delivered\n03 Sep Order ORD-20265518 returned\n28 Aug support_9538 created",
+  "records": [
+   {
+    "system": "account_service",
+    "resource_id": "user_11",
+    "identifiers": [
+     "user_11",
+     "account_5762",
+     "Haruka Sato",
+     "haruka.s1838@zoho.com",
+     "+81 90 7610 2507"
+    ],
+    "status": "Active",
+    "fields": {
+     "Name": "Haruka Sato",
+     "Account ID": "account_5762",
+     "Loyalty tier": "Silver",
+     "Email": "haruka.s1838@zoho.com",
+     "Phone": "+81 90 7610 2507",
+     "Signup channel": "mobile_app",
+     "Market": "JP",
+     "Preferred language": "Japanese",
+     "Last contact": "24 Sep 2026 09:14 JST",
+     "Default address": "2-18-4 Kichijoji, Musashino, Tokyo 180-0004",
+     "Member since": "12 Jan 2024"
+    }
+   },
+   {
+    "system": "order_service",
+    "resource_id": "ORD-20265762",
+    "identifiers": [
+     "ORD-20265762"
+    ],
+    "status": "Delivered · 18 Sep",
+    "fields": {
+     "Order ID": "ORD-20265762",
+     "Date": "12 Sep 2026",
+     "Item": "Ceramic coffee set",
+     "Qty": "1",
+     "Total": "JPY 8,900",
+     "Status": "Delivered · 18 Sep"
+    }
+   },
+   {
+    "system": "order_service",
+    "resource_id": "ORD-20265518",
+    "identifiers": [
+     "ORD-20265518"
+    ],
+    "status": "Returned · 03 Sep",
+    "fields": {
+     "Order ID": "ORD-20265518",
+     "Date": "28 Aug 2026",
+     "Item": "Travel backpack",
+     "Qty": "1",
+     "Total": "JPY 12,400",
+     "Status": "Returned · 03 Sep"
+    }
+   },
+   {
+    "system": "support_platform",
+    "resource_id": "support_9538",
+    "identifiers": [
+     "support_9538",
+     "CS-8538"
+    ],
+    "status": "Active",
+    "fields": {
+     "Ticket ID": "CS-8538",
+     "Internal Resource ID": "support_9538",
+     "Created": "28 Aug",
+     "Last Activity": "24 Sep Customer replied to CS-8538"
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "provider": "gemini",
+ "model": "gemini-3.8-flash",
+ "file": "deleted_account_reference_20260310.png",
+ "sha256": "68c28a72afd6ed184d5990d15c543f8a516face204f0360f732755a8a63c28be",
+ "usage": {
+  "input_tokens": 1399,
+  "output_tokens": 909
+ },
+ "result": {
+  "screen": "Northstar Shop - Customer Reference Registry - user_17",
+  "captured_text": "Northstar Shop / Customer Reference Registry / Customer references\nuser_17 Retained reference\nCustomer key · Account Platform · eu-west\nReference type: Customer key\nCreated: 11 Jan 2024 08:42 UTC\nMost recent update: 10 Mar 2026 07:18 UTC\nOwner team: Account Platform\nOrders ORD-20263245 Linked to customer 11 Jan 2024 08:45 Active\nSupport CS-3245 Linked to customer 14 Feb 2024 12:16 Active\nSupport CS-3378 Linked to customer 03 Jun 2024 09:27 Active\nFinance FIN-7742 Linked to customer 22 Aug 2024 15:03 Active\nHistory:\n10 Mar 2026 Metadata reviewed\n22 Aug 2024 Finance link added\n03 Jun 2024 Support link added\n14 Feb 2024 Support link added\n11 Jan 2024 Reference created\nActivity:\nReference created Recorded\nOrder link added ORD-20263245\nSupport links added CS-3245, CS-3378\nFinance link added FIN-7742\nMetadata reviewed Recorded",
+  "records": [
+   {
+    "system": "Account Platform",
+    "resource_id": "user_17",
+    "identifiers": [
+     "user_17"
+    ],
+    "status": "Retained reference",
+    "fields": {
+     "Reference type": "Customer key",
+     "Owner team": "Account Platform",
+     "Region": "eu-west",
+     "Created": "11 Jan 2024 08:42 UTC",
+     "Most recent update": "10 Mar 2026 07:18 UTC"
+    }
+   },
+   {
+    "system": "Orders",
+    "resource_id": "ORD-20263245",
+    "identifiers": [
+     "ORD-20263245"
+    ],
+    "status": "Active",
+    "fields": {
+     "Relationship": "Linked to customer",
+     "Created (UTC)": "11 Jan 2024 08:45"
+    }
+   },
+   {
+    "system": "Support",
+    "resource_id": "CS-3245",
+    "identifiers": [
+     "CS-3245"
+    ],
+    "status": "Active",
+    "fields": {
+     "Relationship": "Linked to customer",
+     "Created (UTC)": "14 Feb 2024 12:16"
+    }
+   },
+   {
+    "system": "Support",
+    "resource_id": "CS-3378",
+    "identifiers": [
+     "CS-3378"
+    ],
+    "status": "Active",
+    "fields": {
+     "Relationship": "Linked to customer",
+     "Created (UTC)": "03 Jun 2024 09:27"
+    }
+   },
+   {
+    "system": "Finance",
+    "resource_id": "FIN-7742",
+    "identifiers": [
+     "FIN-7742"
+    ],
+    "status": "Active",
+    "fields": {
+     "Relationship": "Linked to customer",
+     "Created (UTC)": "22 Aug 2024 15:03"
+    }
+   }
+  ]
+ }
+}

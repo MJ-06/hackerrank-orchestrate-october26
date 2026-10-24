@@ -1,0 +1,79 @@
+{
+ "provider": "gemini",
+ "model": "gemini-3.8-flash",
+ "file": "connector_management_console_20260807.png",
+ "sha256": "e81fabc93ea1b5f4c918d934cdb2bea05d61737adfcc29f281494f5d8ec46355",
+ "usage": {
+  "input_tokens": 1373,
+  "output_tokens": 655
+ },
+ "result": {
+  "screen": "Northstar Shop - BridgeOps - Connections",
+  "captured_text": "data_flow_1121 customer_analytics_warehouse jain.aditi@gmail.com data_flow_9846 lucia-torres@gmail.com Order notifications notification_service Delivery tracking logistics_warehouse",
+  "records": [
+   {
+    "system": "integration_service",
+    "resource_id": "data_flow_1121",
+    "identifiers": [
+     "jain.aditi@gmail.com"
+    ],
+    "status": "Healthy",
+    "fields": {
+     "Connector": "data_flow_1121",
+     "Destination": "customer_analytics_warehouse",
+     "Selector": "jain.aditi@gmail.com",
+     "Mode": "Continuous",
+     "Events/hour": "1,284",
+     "Last contact": "07:59:42",
+     "Owner": "Data Platform",
+     "Sync mode": "Continuous sync",
+     "Last response": "200 OK · 1.8 s"
+    }
+   },
+   {
+    "system": "integration_service",
+    "resource_id": "data_flow_9846",
+    "identifiers": [
+     "lucia-torres@gmail.com"
+    ],
+    "status": "Healthy",
+    "fields": {
+     "Connector": "data_flow_9846",
+     "Destination": "customer_analytics_warehouse",
+     "Selector": "lucia-torres@gmail.com",
+     "Mode": "Continuous",
+     "Events/hour": "842",
+     "Last contact": "07:59:36"
+    }
+   },
+   {
+    "system": "integration_service",
+    "resource_id": "Order notifications",
+    "identifiers": [],
+    "status": "Healthy",
+    "fields": {
+     "Connector": "Order notifications",
+     "Destination": "notification_service",
+     "Selector": "order events",
+     "Mode": "Continuous",
+     "Events/hour": "650",
+     "Last contact": "07:59:28"
+    }
+   },
+   {
+    "system": "integration_service",
+    "resource_id": "Delivery tracking",
+    "identifiers": [],
+    "status": "Healthy",
+    "fields": {
+     "Connector": "Delivery tracking",
+     "Destination": "logistics_warehouse",
+     "Selector": "shipment events",
+     "Mode": "Continuous",
+     "Events/hour": "420",
+     "Last contact": "07:59:13"
+    }
+   }
+  ]
+ }
+}

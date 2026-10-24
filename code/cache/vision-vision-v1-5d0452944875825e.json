@@ -1,0 +1,87 @@
+{
+ "provider": "gemini",
+ "model": "gemini-3.8-flash",
+ "file": "customer_export_console_20260618.png",
+ "sha256": "18b95c1bd8b8956e40216df935498a9f3c181ea2a69b5cd6d3c0841a816d5557",
+ "usage": {
+  "input_tokens": 1399,
+  "output_tokens": 893
+ },
+ "result": {
+  "screen": "Northstar Shop - Customer Download Center - Data exports",
+  "captured_text": "export_1261 customer_export_1261.zip marcus.lee@northstar.shop export_1260 customer_export_1260.zip ingrid.dahl@outlook.com export_1259 customer_export_1259.zip sara.kim@northstar.shop export_1258 customer_export_1258.zip daniel.park@northstar.shop SHA-256 · 41ca09...",
+  "records": [
+   {
+    "system": "export_service",
+    "resource_id": "export_1261",
+    "identifiers": [
+     "export_1261",
+     "customer_export_1261.zip",
+     "marcus.lee@northstar.shop"
+    ],
+    "status": "Collecting",
+    "fields": {
+     "Filename": "customer_export_1261.zip",
+     "Owner": "marcus.lee@northstar.shop",
+     "Status": "Collecting",
+     "Created": "20 Jun 14:18 UTC"
+    }
+   },
+   {
+    "system": "export_service",
+    "resource_id": "export_1260",
+    "identifiers": [
+     "export_1260",
+     "customer_export_1260.zip",
+     "ingrid.dahl@outlook.com",
+     "SHA-256 · 41ca09..."
+    ],
+    "status": "Ready",
+    "fields": {
+     "Filename": "customer_export_1260.zip",
+     "Owner": "ingrid.dahl@outlook.com",
+     "Status": "Ready",
+     "Created": "18 Jun 2026 06:42 UTC",
+     "Expires": "25 Jun 2026 06:42 UTC",
+     "Size": "18.4 MB",
+     "Checksum": "SHA-256 · 41ca09...",
+     "Download count": "0",
+     "Included": "Profile · Orders · Saved addresses",
+     "Activity": "06:46 Ready for download | 06:45 Package created | 06:43 Collecting customer records | 06:42 Export requested"
+    }
+   },
+   {
+    "system": "export_service",
+    "resource_id": "export_1259",
+    "identifiers": [
+     "export_1259",
+     "customer_export_1259.zip",
+     "sara.kim@northstar.shop"
+    ],
+    "status": "Packaging",
+    "fields": {
+     "Filename": "customer_export_1259.zip",
+     "Owner": "sara.kim@northstar.shop",
+     "Status": "Packaging",
+     "Created": "17 Jun 11:03 UTC"
+    }
+   },
+   {
+    "system": "export_service",
+    "resource_id": "export_1258",
+    "identifiers": [
+     "export_1258",
+     "customer_export_1258.zip",
+     "daniel.park@northstar.shop"
+    ],
+    "status": "Ready",
+    "fields": {
+     "Filename": "customer_export_1258.zip",
+     "Owner": "daniel.park@northstar.shop",
+     "Status": "Ready",
+     "Created": "16 Jun 09:27 UTC"
+    }
+   }
+  ]
+ }
+}

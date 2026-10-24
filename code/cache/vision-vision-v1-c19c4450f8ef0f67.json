@@ -1,0 +1,45 @@
+{
+ "provider": "gemini",
+ "model": "gemini-3.8-flash",
+ "file": "analytics_profile_view_20260713.png",
+ "sha256": "4e4cb259bc2010b622b0c53fe5872258f994fefc23452a83bb27473758693484",
+ "usage": {
+  "input_tokens": 1373,
+  "output_tokens": 648
+ },
+ "result": {
+  "screen": "Pulse Analytics - Users - Omar Darwish",
+  "captured_text": "Northstar Shop / Pulse Analytics / Users\nOmar Darwish Last 90 days\nuser_20 · analytics_7438 · darwish.omar@icloud.com\nSessions: 12\nProducts viewed: 19\nCompleted orders: 2\nRevenue: USD 167.42\nMobile / Desktop: 67% / 33%\nAcquisition: Organic search\nEvent timeline\n14:22 Order completed Ceramic coffee set USD 84.21 Mobile\n14:20 Checkout started 2 items USD 84.21 Mobile\n14:17 Product viewed Ceramic coffee set — Mobile\n14:16 Added to cart Ceramic coffee set USD 42.00 Mobile\n14:12 Product viewed Stoneware mug USD 18.00 Desktop\nProfile attributes\nMarket: AE\nAudience: Returning shopper\nInterest: Coffee & dining\nLast activity: 13 Jul 2026 14:22 UTC\nFirst seen: 21 Apr 2026 09:14 UTC\nActivity\n13 Jul: 6 events in active session\n08 Jul: Order completed · USD 83.21\n30 Jun: Product search · coffee set\n22 Jun: Campaign opened",
+  "records": [
+   {
+    "system": "analytics_platform",
+    "resource_id": "user_20",
+    "identifiers": [
+     "user_20",
+     "analytics_7438",
+     "darwish.omar@icloud.com",
+     "Omar Darwish"
+    ],
+    "status": "Active",
+    "fields": {
+     "Name": "Omar Darwish",
+     "User ID": "user_20",
+     "Analytics ID": "analytics_7438",
+     "Email": "darwish.omar@icloud.com",
+     "Date range filter": "Last 90 days",
+     "Sessions": "12",
+     "Products viewed": "19",
+     "Completed orders": "2",
+     "Revenue": "USD 167.42",
+     "Mobile / Desktop": "67% / 33%",
+     "Acquisition": "Organic search",
+     "Market": "AE",
+     "Audience": "Returning shopper",
+     "Interest": "Coffee & dining",
+     "Last activity": "13 Jul 2026 14:22 UTC",
+     "First seen": "21 Apr 2026 09:14 UTC"
+    }
+   }
+  ]
+ }
+}

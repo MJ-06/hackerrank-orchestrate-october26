@@ -122,3 +122,24 @@ branch=solution/baseline
 repo_root=D:\Projects\hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## [2026-10-24T20:23:25Z] Retention rule for screenshot-only audit records; commit output
+
+User Prompt (verbatim, secrets redacted):
+(coordinator brief, following diya's lead) Keep case_35 search_428 as present; apply rule_12 literally so security audit rows shown only in a screenshot need a supplied retention period; set GEMINI_MODEL=gemini-3.8-flash in .env.example; regenerate output.csv and commit code, cache and output.
+
+Agent Response Summary:
+Added retention_until() to engine.py. It reads retention_until-style fields, and "retain until <date>" text that follows the record id in documents (the evidence_55 PDF gives 2027-08-25 for audit_record_003). RETAIN records now ignore screenshot observations unless the screenshot itself shows a retention period covering audit_at; SQL/JSON/log/PDF sources keep their previous behaviour. case_45 is back to its previous steps (audit_record_003 cites evidence_55, and image-only audit_record_001..006 are dropped). Sample scores are unchanged (status 1.0, step_f1 0.992). The full run used the cache only (11 cache hits, 0 new calls); 9 of 518 rows differ from the previous output.csv.
+
+Actions:
+* Edited code/ghost_audit/engine.py and .env.example
+* python code/main.py --requests sample --no-llm; python code/evaluation/main.py; python code/main.py
+* Committed code, code/cache screenshot results, output.csv and log.txt
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5[1m]
+branch=solution/baseline
+repo_root=D:\Projects\hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none

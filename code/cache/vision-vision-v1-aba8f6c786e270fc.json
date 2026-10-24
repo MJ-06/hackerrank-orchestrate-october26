@@ -1,0 +1,146 @@
+{
+ "provider": "gemini",
+ "model": "gemini-3.8-flash",
+ "file": "object_storage_browser_20260213.png",
+ "sha256": "96e9a191380c29b9e0ab997007268c4cd6353cb6721ebd1ed4a32599d8d37e04",
+ "usage": {
+  "input_tokens": 1373,
+  "output_tokens": 1526
+ },
+ "result": {
+  "screen": "Nimbus Object Storage - northstar-customer-data",
+  "captured_text": "Northstar Shop / Nimbus Object Storage / northstar-customer-data\nnorthstar-customer-data 8 objects\neu-west-1 / support-attachments / 2026 / 02\nAccount Northstar Production\nRegion eu-west-1\nCaptured 13 Feb 2026 08:00 UTC\nStorage class All\ndelivery_confirmation_19.pdf\ndelivery_confirmation_20.pdf\nreturn_label_4821.pdf\nreturn_label_4876.pdf\ninvoice_NS-10493.pdf\nparcel_damage_7713.jpg\ncustomer_export_2026-02-10.zip\ncustomer_export_2026-02-12.zip\nsupport-service\ne71b6d...",
+  "records": [
+   {
+    "system": "object_storage",
+    "resource_id": "delivery_confirmation_19.pdf",
+    "identifiers": [
+     "delivery_confirmation_19.pdf",
+     "e71b6d...",
+     "support-service"
+    ],
+    "status": null,
+    "fields": {
+     "Name": "delivery_confirmation_19.pdf",
+     "Size": "684 KB",
+     "Modified (UTC)": "12 Feb 18:42",
+     "Storage class": "Standard",
+     "Version": "v3",
+     "Content type": "application/pdf",
+     "Encryption": "AES-256",
+     "Checksum": "e71b6d...",
+     "Uploader": "support-service",
+     "Modified": "12 Feb 2026 18:42 UTC",
+     "Activity v3": "12 Feb 18:42 · metadata update",
+     "Activity v2": "12 Feb 18:39 · upload complete",
+     "Activity v1": "12 Feb 18:38 · object created"
+    }
+   },
+   {
+    "system": "object_storage",
+    "resource_id": "delivery_confirmation_20.pdf",
+    "identifiers": [
+     "delivery_confirmation_20.pdf"
+    ],
+    "status": null,
+    "fields": {
+     "Name": "delivery_confirmation_20.pdf",
+     "Size": "712 KB",
+     "Modified (UTC)": "11 Feb 14:17",
+     "Storage class": "Standard",
+     "Version": "v1"
+    }
+   },
+   {
+    "system": "object_storage",
+    "resource_id": "return_label_4821.pdf",
+    "identifiers": [
+     "return_label_4821.pdf"
+    ],
+    "status": null,
+    "fields": {
+     "Name": "return_label_4821.pdf",
+     "Size": "203 KB",
+     "Modified (UTC)": "10 Feb 09:33",
+     "Storage class": "Standard",
+     "Version": "v1"
+    }
+   },
+   {
+    "system": "object_storage",
+    "resource_id": "return_label_4876.pdf",
+    "identifiers": [
+     "return_label_4876.pdf"
+    ],
+    "status": null,
+    "fields": {
+     "Name": "return_label_4876.pdf",
+     "Size": "198 KB",
+     "Modified (UTC)": "11 Feb 16:05",
+     "Storage class": "Standard",
+     "Version": "v2"
+    }
+   },
+   {
+    "system": "object_storage",
+    "resource_id": "invoice_NS-10493.pdf",
+    "identifiers": [
+     "invoice_NS-10493.pdf"
+    ],
+    "status": null,
+    "fields": {
+     "Name": "invoice_NS-10493.pdf",
+     "Size": "318 KB",
+     "Modified (UTC)": "10 Feb 11:21",
+     "Storage class": "Standard",
+     "Version": "v1"
+    }
+   },
+   {
+    "system": "object_storage",
+    "resource_id": "parcel_damage_7713.jpg",
+    "identifiers": [
+     "parcel_damage_7713.jpg"
+    ],
+    "status": null,
+    "fields": {
+     "Name": "parcel_damage_7713.jpg",
+     "Size": "2.4 MB",
+     "Modified (UTC)": "12 Feb 10:08",
+     "Storage class": "Standard",
+     "Version": "v1"
+    }
+   },
+   {
+    "system": "object_storage",
+    "resource_id": "customer_export_2026-02-10.zip",
+    "identifiers": [
+     "customer_export_2026-02-10.zip"
+    ],
+    "status": null,
+    "fields": {
+     "Name": "customer_export_2026-02-10.zip",
+     "Size": "128 MB",
+     "Modified (UTC)": "10 Feb 23:14",
+     "Storage class": "Standard",
+     "Version": "v1"
+    }
+   },
+   {
+    "system": "object_storage",
+    "resource_id": "customer_export_2026-02-12.zip",
+    "identifiers": [
+     "customer_export_2026-02-12.zip"
+    ],
+    "status": null,
+    "fields": {
+     "Name": "customer_export_2026-02-12.zip",
+     "Size": "131 MB",
+     "Modified (UTC)": "12 Feb 21:56",
+     "Storage class": "Standard",
+     "Version": "v1"
+    }
+   }
+  ]
+ }
+}

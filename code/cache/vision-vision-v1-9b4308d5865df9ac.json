@@ -1,0 +1,67 @@
+{
+ "provider": "gemini",
+ "model": "gemini-3.8-flash",
+ "file": "support_ticket_console_20260524.png",
+ "sha256": "542b7aec17e6b2f38827896e7eb52c70e4bfaaca22433621be1f80f54884e944",
+ "usage": {
+  "input_tokens": 1387,
+  "output_tokens": 778
+ },
+ "result": {
+  "screen": "Helpline Console - CS-5034 · Where is my delivery?",
+  "captured_text": "Helpline Console CS-5034 · Where is my delivery? support_1034 · Kofi Agyeman · Normal priority SLA 01:42 Customer Kofi Agyeman Email kagyeman8947@fastmail.com Assigned Maya Chen Tags Delivery · Tracking · Order update Order ORD-20265034 Product Running shoes Status In transit Carrier SwiftShip Tracking SWF-884103 Expected 26 May 2026 Assigned agent Maya Chen",
+  "records": [
+   {
+    "system": "support_platform",
+    "resource_id": "CS-5034",
+    "identifiers": [
+     "CS-5034",
+     "support_1034",
+     "Kofi Agyeman",
+     "kagyeman8947@fastmail.com",
+     "Maya Chen"
+    ],
+    "status": "SLA 01:42",
+    "fields": {
+     "Ticket ID": "CS-5034",
+     "Title": "Where is my delivery?",
+     "Support Reference": "support_1034",
+     "Priority": "Normal priority",
+     "SLA": "SLA 01:42",
+     "Customer": "Kofi Agyeman",
+     "Email": "kagyeman8947@fastmail.com",
+     "Assigned": "Maya Chen",
+     "Tags": "Delivery · Tracking · Order update",
+     "Message 1 (09:12) - Kofi Agyeman": "Could you let me know where my order is and when it is expected to arrive?",
+     "Message 2 (09:13) - Northstar Bot": "We received your message and are checking the order details.",
+     "Message 3 (09:28) - Maya Chen": "The parcel reached the regional hub and is on track for delivery on 26 May.",
+     "Message 4 (09:35) - Kofi Agyeman": "Thanks for the update."
+    }
+   },
+   {
+    "system": "support_platform",
+    "resource_id": "ORD-20265034",
+    "identifiers": [
+     "ORD-20265034",
+     "SWF-884103",
+     "Maya Chen"
+    ],
+    "status": "In transit",
+    "fields": {
+     "Order ID": "ORD-20265034",
+     "Product": "Running shoes",
+     "Status": "In transit",
+     "Carrier": "SwiftShip",
+     "Tracking": "SWF-884103",
+     "Expected": "26 May 2026",
+     "Assigned agent": "Maya Chen",
+     "Activity - 22 May": "Order confirmed",
+     "Activity - 23 May": "Dispatched",
+     "Activity - 24 May 07:46": "Reached regional hub",
+     "Activity - 24 May 08:15": "In transit",
+     "Activity - 26 May": "Delivery expected"
+    }
+   }
+  ]
+ }
+}

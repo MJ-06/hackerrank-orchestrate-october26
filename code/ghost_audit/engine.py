@@ -78,6 +78,45 @@ def _is_null(v):
     return v is None or (isinstance(v, str) and v.strip().lower() in ("", "null", "none", "[redacted]", "no direct identifier"))
 
 
+# --------------------------------------------------------------------------- retention
+
+MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
+ISO_DATE_RE = re.compile(r"(\d{4})-(\d{2})-(\d{2})")
+DMY_DATE_RE = re.compile(r"(\d{1,2})\s+([A-Za-z]{3})[a-z]*\s+(\d{4})")
+RETAIN_UNTIL_RE = re.compile(r"retain(?:ed)?\s+until\s*:?\s*(\d{4}-\d{2}-\d{2}|\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4})", re.I)
+
+
+def _to_iso_date(value) -> str | None:
+    """'2033-12-31T23:59:59Z' or '25 Aug 2027' -> '2033-12-31' / '2027-08-25'."""
+    s = str(value or "")
+    m = ISO_DATE_RE.search(s)
+    if m:
+        return "-".join(m.groups())
+    m = DMY_DATE_RE.search(s)
+    if m and m.group(2).lower() in MONTHS:
+        return f"{m.group(3)}-{MONTHS[m.group(2).lower()]:02d}-{int(m.group(1)):02d}"
+    return None
+
+
+def retention_until(obs: dict) -> str | None:
+    """Retention end date an observation supplies for its own record, if any."""
+    f = obs["fields"]
+    for k, v in f.items():
+        if "retention" in k and ("until" in k or "end" in k or "expires" in k):
+            d = _to_iso_date(v)
+            if d:
+                return d
+    # Free text: a "retain until <date>" that follows this record's id, before any other record id.
+    doc = str(f.get("document_text") or "")
+    for m in re.finditer(re.escape(obs["resource_id"]) + r"\b", doc):
+        tail = doc[m.end():]
+        other = RESOURCE_RE.search(tail)
+        r = RETAIN_UNTIL_RE.search(tail, 0, other.start() if other else len(tail))
+        if r:
+            return _to_iso_date(r.group(1))
+    return None
+
+
 # --------------------------------------------------------------------------- state
 
 
@@ -298,14 +337,30 @@ class Auditor:
             return "REDACT"
         return "DELETE"
 
-    # ------------------------------------------------------------------ state
-    def state_at(self, rid: str, audit_at: str, strict: bool = True):
+    @staticmethod
+    def retain_evidence(audit_at: str):
+        """Filter for observations that can support RETAIN (rule: within the supplied retention period).
+
+        Records from structured sources (SQL/JSON/logs/documents) keep their
+        existing treatment. A screenshot row only counts when it shows a
+        retention period covering audit_at itself; otherwise it cannot prove the
+        RETAIN condition, and the step cites the evidence that does (if any).
+        """
+        day = audit_at[:10]
+
+        def keep(o):
+            return o["source"] != "image" or (retention_until(o) or "") >= day
+
+        return keep
+    def state_at(self, rid: str, audit_at: str, strict: bool = True, keep=None):
         """Latest determinate observation known at audit_at (worst copy wins on ties).
 
         strict=True only uses files captured at or before audit_at, so every
-        cited evidence id was available to the auditor at that time.
+        cited evidence id was available to the auditor at that time. `keep`
+        optionally restricts which observations may be used.
         """
-        cands = [o for o in self.by_resource.get(rid, []) if o["ts"] <= audit_at and (not strict or o["captured_at"] <= audit_at)]
+        cands = [o for o in self.by_resource.get(rid, []) if o["ts"] <= audit_at and (not strict or o["captured_at"] <= audit_at)
+                 and (keep is None or keep(o))]
         if not cands:
             return None, None
         cands.sort(key=lambda o: (o["ts"], o["captured_at"]))
@@ -442,11 +497,12 @@ class Auditor:
         for rid in sorted(rids):
             system = system_for(rid)
             treat = self.treatment(rid)
-            obs, st = self.state_at(rid, audit_at)
+            keep = self.retain_evidence(audit_at) if treat == "RETAIN" else None
+            obs, st = self.state_at(rid, audit_at, keep=keep)
             if obs is None and treat == "RETAIN":
                 # A retained record seen only in a later capture still needs a
                 # post-remediation presence check; it just cannot be cited.
-                later, lst = self.state_at(rid, "9999", strict=False)
+                later, lst = self.state_at(rid, "9999", strict=False, keep=keep)
                 if later is not None and lst["exists"]:
                     verification.append((system, rid, "VERIFY_RECORD_PRESENT", None))
                 continue

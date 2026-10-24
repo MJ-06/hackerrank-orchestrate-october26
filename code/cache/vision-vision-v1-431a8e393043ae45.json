@@ -1,0 +1,131 @@
+{
+ "provider": "gemini",
+ "model": "gemini-3.8-flash",
+ "file": "security_audit_explorer_20260905.png",
+ "sha256": "ca59f693f4e7002466b3fdeaf1bb6763618770963dd811b60003772d07b4b03b",
+ "usage": {
+  "input_tokens": 1399,
+  "output_tokens": 1238
+ },
+ "result": {
+  "screen": "Sentinel - Account events",
+  "captured_text": "Northstar Shop / Sentinel / Account events\nAccount events 6 signed events\nSubject filter: user_03 · 18-26 Aug 2026 UTC\nEvents 6 | Categories 5 | Integrity failures 0 | Partition 2026-Q3\naudit_record_003 · Raw event\nevent_type account_closure_recorded\nsubject user_03\nactor automated account workflow\nrecorded_at 2026-08-25T04:03:00Z\nfingerprint 8f0c...31ad\nsignature Valid\njournal 2026-Q3",
+  "records": [
+   {
+    "system": "security_service",
+    "resource_id": "audit_record_003",
+    "identifiers": [
+     "user_03",
+     "audit_record_003",
+     "8f0c...31ad"
+    ],
+    "status": "Valid",
+    "fields": {
+     "Time (UTC)": "25 Aug 04:03",
+     "Event": "Account closure recorded",
+     "Category": "Account lifecycle",
+     "Subject": "user_03",
+     "Actor": "Automated workflow",
+     "Integrity": "Valid",
+     "Reference": "audit_record_003",
+     "event_type": "account_closure_recorded",
+     "actor_detail": "automated account workflow",
+     "recorded_at": "2026-08-25T04:03:00Z",
+     "fingerprint": "8f0c...31ad",
+     "signature": "Valid",
+     "journal": "2026-Q3"
+    }
+   },
+   {
+    "system": "security_service",
+    "resource_id": "audit_record_002",
+    "identifiers": [
+     "user_03",
+     "audit_record_002"
+    ],
+    "status": "Valid",
+    "fields": {
+     "Time (UTC)": "25 Aug 03:21",
+     "Event": "Session revoked",
+     "Category": "Session management",
+     "Subject": "user_03",
+     "Actor": "Security system",
+     "Integrity": "Valid",
+     "Reference": "audit_record_002"
+    }
+   },
+   {
+    "system": "security_service",
+    "resource_id": "audit_record_001",
+    "identifiers": [
+     "user_03",
+     "audit_record_001"
+    ],
+    "status": "Valid",
+    "fields": {
+     "Time (UTC)": "24 Aug 16:14",
+     "Event": "Recovery challenge completed",
+     "Category": "Authentication",
+     "Subject": "user_03",
+     "Actor": "User (self)",
+     "Integrity": "Valid",
+     "Reference": "audit_record_001"
+    }
+   },
+   {
+    "system": "security_service",
+    "resource_id": "audit_record_006",
+    "identifiers": [
+     "user_03",
+     "audit_record_006"
+    ],
+    "status": "Valid",
+    "fields": {
+     "Time (UTC)": "22 Aug 11:27",
+     "Event": "Email change confirmed",
+     "Category": "Profile update",
+     "Subject": "user_03",
+     "Actor": "User (self)",
+     "Integrity": "Valid",
+     "Reference": "audit_record_006"
+    }
+   },
+   {
+    "system": "security_service",
+    "resource_id": "audit_record_005",
+    "identifiers": [
+     "user_03",
+     "audit_record_005"
+    ],
+    "status": "Valid",
+    "fields": {
+     "Time (UTC)": "20 Aug 09:42",
+     "Event": "Login from new device",
+     "Category": "Authentication",
+     "Subject": "user_03",
+     "Actor": "User (self)",
+     "Integrity": "Valid",
+     "Reference": "audit_record_005"
+    }
+   },
+   {
+    "system": "security_service",
+    "resource_id": "audit_record_004",
+    "identifiers": [
+     "user_03",
+     "audit_record_004"
+    ],
+    "status": "Valid",
+    "fields": {
+     "Time (UTC)": "18 Aug 14:05",
+     "Event": "Password changed",
+     "Category": "Authentication",
+     "Subject": "user_03",
+     "Actor": "User (self)",
+     "Integrity": "Valid",
+     "Reference": "audit_record_004"
+    }
+   }
+  ]
+ }
+}

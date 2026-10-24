@@ -1,0 +1,94 @@
+{
+ "provider": "gemini",
+ "model": "gemini-3.8-flash",
+ "file": "backup_restore_console_20260429.png",
+ "sha256": "2c246aa5843bec609b9ddfdf1154cd81e0fd61996f83954735e9856e48c18bf3",
+ "usage": {
+  "input_tokens": 1373,
+  "output_tokens": 891
+ },
+ "result": {
+  "screen": "Vault Recovery Manager - Customer-platform archives",
+  "captured_text": "Customer-platform archives backup_9291 bluepeakco@outlook.com backup_9288 miller.logistics@company.com backup_9287 areed1433@gmail.com s3://northstar-backups/customer-platform/weekly/segment-42-20260426.tar.zst backup_9286 summit-retail@company.com backup_9281",
+  "records": [
+   {
+    "system": "backup_service",
+    "resource_id": "backup_9291",
+    "identifiers": [
+     "bluepeakco@outlook.com"
+    ],
+    "status": "Archive",
+    "fields": {
+     "Account": "bluepeakco@outlook.com",
+     "Region": "ap-southeast-1",
+     "Created": "26 Apr 02:00",
+     "Size": "102.3 GB",
+     "Encryption": "AES-256",
+     "Tier": "Archive"
+    }
+   },
+   {
+    "system": "backup_service",
+    "resource_id": "backup_9288",
+    "identifiers": [
+     "miller.logistics@company.com"
+    ],
+    "status": "Archive",
+    "fields": {
+     "Account": "miller.logistics@company.com",
+     "Region": "us-west-2",
+     "Created": "26 Apr 02:00",
+     "Size": "67.1 GB",
+     "Encryption": "AES-256",
+     "Tier": "Archive"
+    }
+   },
+   {
+    "system": "backup_service",
+    "resource_id": "backup_9287",
+    "identifiers": [
+     "areed1433@gmail.com"
+    ],
+    "status": "Archive",
+    "fields": {
+     "Account": "areed1433@gmail.com",
+     "Path": "s3://northstar-backups/customer-platform/weekly/segment-42-20260426.tar.zst",
+     "Region": "eu-west-1",
+     "Created": "26 Apr 2026 02:00 UTC",
+     "Size": "84.7 GB",
+     "Encryption": "AES-256",
+     "Checksum": "Verified",
+     "Last drill": "29 Mar 2026",
+     "Retention end": "26 Jul 2026",
+     "Tier": "Archive"
+    }
+   },
+   {
+    "system": "backup_service",
+    "resource_id": "backup_9286",
+    "identifiers": [
+     "summit-retail@company.com"
+    ],
+    "status": "Archive",
+    "fields": {
+     "Account": "summit-retail@company.com",
+     "Region": "us-east-1",
+     "Created": "26 Apr 02:00",
+     "Size": "91.4 GB",
+     "Encryption": "AES-256",
+     "Tier": "Archive",
+     "Activity": "25 Apr backup_9286 restored · Completed"
+    }
+   },
+   {
+    "system": "backup_service",
+    "resource_id": "backup_9281",
+    "identifiers": [],
+    "status": "Completed",
+    "fields": {
+     "Activity": "24 Apr backup_9281 restored · Completed"
+    }
+   }
+  ]
+ }
+}
