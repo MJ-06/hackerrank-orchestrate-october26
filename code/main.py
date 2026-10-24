@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from ghost_audit.engine import Auditor  # noqa: E402
-from ghost_audit.llm import ClaudeHelper, load_dotenv  # noqa: E402
+from ghost_audit.llm import ClaudeHelper, list_gemini_models, load_dotenv  # noqa: E402
 
 USAGE_FILE = ROOT / "code" / "evaluation" / "usage_summary.json"
 
@@ -55,7 +55,16 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--requests", choices=["full", "sample"], default="full")
     ap.add_argument("--no-llm", action="store_true", help="never call the API; use cached vision results only")
+    ap.add_argument("--list-gemini-models", action="store_true",
+                    help="print Gemini 'flash' models that support generateContent, then exit")
     args = ap.parse_args()
+    if args.list_gemini_models:
+        load_dotenv(ROOT)
+        names = list_gemini_models()
+        if names is None:
+            sys.exit("could not list Gemini models (is GEMINI_API_KEY set?)")
+        print("\n".join(names))
+        return
     if args.requests == "sample":
         out = run(ROOT / "dataset" / "sample_deletion_requests.csv",
                   ROOT / "code" / "evaluation" / "sample_predictions.csv",
