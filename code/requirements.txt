@@ -1,1 +1,9 @@
+# The audit engine and the Gemini provider use only the Python standard library.
+# Everything below is optional.
+
+# PDF text extraction, used when the `pdftotext` binary (poppler) is not on PATH.
+pypdf>=4.0
+# Anthropic vision provider (GHOST_LLM_PROVIDER=anthropic).
 anthropic>=0.70
+# Test suite: python -m pytest code/tests
+pytest>=8.0
