@@ -331,6 +331,34 @@ def parse_document_text(text: str, file_id: str, captured_at: str, source: str):
     return out
 
 
+def parse_screenshot(result: dict, file_id: str, captured_at: str):
+    """Vision transcription -> one observation per record shown on screen."""
+    from .llm import normalize_status, screenshot_to_text
+
+    out = []
+    full_text = screenshot_to_text(result)
+    seen = set()
+    for rec in result.get("records", []):
+        rid = str(rec.get("resource_id", "")).strip()
+        if not RESOURCE_RE.fullmatch(rid):
+            continue
+        seen.add(rid)
+        fields = {"identifiers": [str(i) for i in rec.get("identifiers", [])], "screen_status": rec.get("status")}
+        status = normalize_status(rec.get("status", ""))
+        if status:
+            fields["result"] = status
+        for k, v in (rec.get("fields") or {}).items():
+            fields[f"screen_{re.sub(r'[^a-z0-9]+', '_', str(k).lower()).strip('_')}"] = v
+        system = rec.get("system") if rec.get("system") in KNOWN_SYSTEMS else None
+        out.append(_obs(file_id, captured_at, captured_at, rid, fields, "image", system))
+    # Ids mentioned only in free text still get linked through the shared text.
+    for m in RESOURCE_RE.finditer(full_text):
+        if m.group(0) not in seen:
+            seen.add(m.group(0))
+            out.append(_obs(file_id, captured_at, captured_at, m.group(0), {"document_text": full_text}, "image"))
+    return out
+
+
 # --------------------------------------------------------------------------- loader
 
 
@@ -363,10 +391,10 @@ def load_all(dataset: Path, image_extractor=None):
                 documents[fid] = text
                 observations += parse_document_text(text, fid, cap, "pdf")
             elif suffix in (".png", ".jpg", ".jpeg"):
-                text = image_extractor(path) if image_extractor else ""
-                documents[fid] = text
-                if text:
-                    observations += parse_document_text(text, fid, cap, "image")
+                result = image_extractor(path) if image_extractor else None
+                if result:
+                    observations += parse_screenshot(result, fid, cap)
+                    documents[fid] = result
                 else:
                     skipped.append((fid, "image-not-extracted"))
         except Exception as exc:  # keep the run alive; report the file
